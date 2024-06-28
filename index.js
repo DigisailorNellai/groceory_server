@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import productGetRoute from './routes/product_get.js';
 import productPost from './routes/products_post.js';
 import userCart from './routes/cart.js';
-//import router from './routes/auth';
+import serverless from 'serverless-http';
 dotenv.config();
 // Initialize Express app
 const app = express();
@@ -23,5 +23,5 @@ connectToMongoDB();
 // });
 const port = process.env.PORT;
 // Connect to MongoDB and start server
-
-app.listen(port, () => console.log(`Server is running on http://localhost:${port}`));
+export const handler = serverless(app);
+//app.listen(port, () => console.log(`Server is running on http://localhost:${port}`));

@@ -1,0 +1,28 @@
+service: grocery-server # Replace with your service name
+
+frameworkVersion: '4.1.7'
+
+provider:
+  name: aws
+  runtime: nodejs14.x  # Choose the Node.js runtime version suitable for your application
+  region: us-east-1   # Replace with your desired AWS region
+
+functions:
+  app:
+    handler: index.handler
+    environment:
+      PORT: ${env:PORT}
+      MONGODB_URI: ${env:MONGODB_URI}
+      JWT_SECRET: ${env:JWT_SECRET}
+      MAIL_ID: ${env:MAIL_ID}
+      MAIL_PASS: ${env:MAIL_PASS}
+    events:
+      - httpApi:
+          path: /
+          method: ANY
+      - httpApi:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-dotenv-plugin  # Include if you're using dotenv for managing environment variables

@@ -55,7 +55,7 @@ const hashedPassword = bcrypt.hashSync(password, salt);
         debugger
         await sendEmail(user.email,'Your OTP',`Your OTP is ${otp}`);
     //res.status(200).json({message:'otp has send to your mail id'});
-    res.send({ userId: user._id , message:'otp has sent to your mail'});
+    res.send({ userId: user._id , user: user,message:'otp has sent to your mail'});
     
     }
 
